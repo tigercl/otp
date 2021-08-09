@@ -33,7 +33,7 @@
 	 maps/1, coverage/1, otp_14178_unicode_atoms/1, otp_14175/1,
          otp_14285/1, limit_term/1, otp_14983/1, otp_15103/1, otp_15076/1,
          otp_15159/1, otp_15639/1, otp_15705/1, otp_15847/1, otp_15875/1,
-         chars_limit/1, otp_17525/1]).
+         chars_limit/1, otp_17525/1, github_4801/1]).
 
 -export([pretty/2, trf/3]).
 
@@ -66,7 +66,8 @@ all() ->
      io_lib_width_too_small, io_with_huge_message_queue,
      format_string, maps, coverage, otp_14178_unicode_atoms, otp_14175,
      otp_14285, limit_term, otp_14983, otp_15103, otp_15076, otp_15159,
-     otp_15639, otp_15705, otp_15847, otp_15875, chars_limit, otp_17525].
+     otp_15639, otp_15705, otp_15847, otp_15875, chars_limit, otp_17525,
+     github_4801].
 
 %% Error cases for output.
 error_1(Config) when is_list(Config) ->
@@ -3005,3 +3006,6 @@ otp_17525(_Config) ->
     "                                                                         {...}|...]" =
     lists:flatten(S),
     ok.
+
+github_4801(_Config) ->
+	  <<"{[81.6]}">> = iolist_to_binary(io_lib:format("~p", [{[81.6]}], [{chars_limit,40}])).
