@@ -222,7 +222,7 @@ maybe_ipv6_1(Host, Opts) when tuple_size(Host) =:= 4 -> Opts;
 maybe_ipv6_1(Host, Opts) when tuple_size(Host) =:= 8 -> [inet6 | Opts].
 
 maybe_ipv6_2(Host, Opts) ->
-    case inet:parse_ipv6_address(Host) of
+    case inet:parse_address(Host) of
         {ok, Ip} when is_tuple(Ip) ->
             %% ip string provided, parsed into tuple
             maybe_ipv6_1(Ip, Opts);
